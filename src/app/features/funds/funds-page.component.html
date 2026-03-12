@@ -1,0 +1,33 @@
+<app-page-shell
+  title="Fondos"
+  subtitle="Consulta los fondos disponibles y realiza suscripciones usando la API del fondo de inversiones."
+>
+  <nz-card>
+    @if (funds$ | async; as funds) {
+      <app-responsive-data-table
+        [columns]="$any(fundColumns)"
+        [data]="funds ?? []"
+        [loading]="funds === null"
+        [trackByFn]="$any(trackByFundId)"
+        tableScrollX="780px"
+      >
+        <ng-template #rowAction let-fund>
+          <button nz-button nzType="primary" (click)="openSubscriptionModal(fund)">
+            Suscribirse
+          </button>
+        </ng-template>
+      </app-responsive-data-table>
+    }
+  </nz-card>
+</app-page-shell>
+
+@if (selectedFund(); as fund) {
+  <app-fund-subscription-modal
+    [fund]="fund"
+    [visible]="true"
+    [submitting]="subscriptionLoading()"
+    [receipt]="currentReceipt()"
+    (closed)="closeSubscriptionModal()"
+    (subscriptionSubmitted)="subscribeToFund($event)"
+  />
+}

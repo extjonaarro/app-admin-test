@@ -1,0 +1,25 @@
+<div>
+  <nz-alert
+    [nzType]="alertType"
+    nzShowIcon
+    [nzMessage]="alertTitle"
+    [nzDescription]="receipt().message"
+    class="fund-subscription-result__alert"
+  />
+  <nz-divider nzType="horizontal" />
+
+  <nz-descriptions nzTitle="Comprobante de suscripción" nzLayout="vertical" nzSize="small" [nzColumn]="1" nzBordered>
+    <nz-descriptions-item nzTitle="Fecha y hora">
+      {{ receipt().createdAt | date: 'dd/MM/yyyy HH:mm:ss' }}
+    </nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Fondo">
+      {{ receipt().fundName }}
+    </nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Valor suscrito">
+      {{ receipt().subscribedAmount | currency: 'COP' : 'symbol' : '1.0-0' }}
+    </nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Referencia">
+      {{ receipt().reference }}
+    </nz-descriptions-item>
+  </nz-descriptions>
+</div>

@@ -1,0 +1,12 @@
+<ul nz-menu nzMode="inline" class="sidebar-nav">
+  @for (item of items(); track item.key) {
+    <li
+      nz-menu-item
+      [routerLink]="item.path"
+      routerLinkActive="ant-menu-item-selected"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <span>{{ item.label }}</span>
+    </li>
+  }
+</ul>

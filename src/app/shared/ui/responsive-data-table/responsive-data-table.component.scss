@@ -1,0 +1,41 @@
+.responsive-data-table {
+  &__cards {
+    display: none;
+  }
+
+  &__table {
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    &__cards {
+      display: block;
+    }
+
+    &__table {
+      display: none;
+    }
+  }
+
+  &__card-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__card .responsive-data-table__card-footer {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--ant-color-border, #f0f0f0);
+  }
+
+  &__pagination {
+    margin-top: 16px;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__table .responsive-data-table__pagination {
+    justify-content: flex-end;
+  }
+}

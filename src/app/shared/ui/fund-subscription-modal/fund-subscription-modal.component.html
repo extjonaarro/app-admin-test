@@ -1,0 +1,33 @@
+<nz-modal
+  [nzVisible]="visible()"
+  [nzTitle]="'Suscribirse al fondo'"
+  [nzFooter]="modalFooter"
+  [nzWidth]="720"
+  (nzOnCancel)="handleClose()"
+>
+  <ng-container *nzModalContent>
+    <div class="fund-subscription-modal">
+      @if (receipt(); as receipt) {
+        <app-fund-subscription-result [receipt]="receipt" />
+      } @else {
+        <app-fund-subscription-form
+          [fund]="fund()"
+          [amountControl]="amountControl"
+          [minimumAmountPlaceholder]="minimumAmountPlaceholder()"
+          [errorMessage]="errorMessage"
+        />
+      }
+    </div>
+  </ng-container>
+</nz-modal>
+
+<ng-template #modalFooter>
+  @if (receipt()) {
+    <button nz-button nzType="primary" (click)="handleClose()">Cerrar</button>
+  } @else {
+    <button nz-button [disabled]="submitting()" (click)="handleClose()">Cancelar</button>
+    <button nz-button nzType="primary" [nzLoading]="submitting()" (click)="handlePrimaryAction()">
+      Aceptar
+    </button>
+  }
+</ng-template>

@@ -1,0 +1,28 @@
+services:
+  app-admin-test:
+    build:
+      context: .
+      target: development
+    container_name: app-admin-test
+    ports:
+      - '4200:4200'
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    command: npm run start:host
+    depends_on:
+      - api
+
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: app-admin-test-api
+    ports:
+      - '3000:3000'
+    volumes:
+      - api_data:/app/data
+
+volumes:
+  node_modules:
+  api_data:

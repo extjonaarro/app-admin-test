@@ -1,0 +1,13 @@
+nz-card {
+  border-radius: 20px;
+}
+
+.funds-page__actions {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.funds-page__loading {
+  margin: 0;
+  color: var(--app-text-muted);
+}

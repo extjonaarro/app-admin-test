@@ -1,0 +1,17 @@
+<app-page-shell
+  title="Historial"
+  subtitle="Revisa los movimientos recientes asociados a tus fondos de inversión."
+>
+  <nz-card>
+    @if (history$ | async; as history) {
+      <app-responsive-data-table
+        [columns]="$any(historyColumns)"
+        [data]="history ?? []"
+        [loading]="history === null"
+        [pagination]="paginationConfig"
+        [trackByFn]="$any(trackByHistoryId)"
+        tableScrollX="600px"
+      />
+    }
+  </nz-card>
+</app-page-shell>

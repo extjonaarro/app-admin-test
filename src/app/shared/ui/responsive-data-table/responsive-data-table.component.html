@@ -1,0 +1,108 @@
+<div class="responsive-data-table">
+  <div class="responsive-data-table__cards">
+    @if (loading) {
+      <nz-spin [nzSpinning]="true"></nz-spin>
+    } @else {
+      <div class="responsive-data-table__card-list">
+        @for (item of getDisplayData(); track trackByFn?.($index, item) ?? $index) {
+          <nz-card
+            nzBordered
+            nzHoverable
+            class="responsive-data-table__card"
+          >
+            <nz-descriptions
+              nzBordered
+              nzSize="small"
+              [nzColumn]="1"
+            >
+              @for (col of columns; track col.key) {
+                <nz-descriptions-item [nzTitle]="col.title">
+                  @if (isTagColumn(col)) {
+                    <nz-tag [nzColor]="getTagColor(item, col)">
+                      {{ formatCellValue(item, col) }}
+                    </nz-tag>
+                  } @else {
+                    {{ formatCellValue(item, col) }}
+                  }
+                </nz-descriptions-item>
+              }
+            </nz-descriptions>
+            @if (rowAction(); as actionTpl) {
+              <div class="responsive-data-table__card-footer">
+                <ng-container [ngTemplateOutlet]="actionTpl" [ngTemplateOutletContext]="{ $implicit: item }"></ng-container>
+              </div>
+            }
+          </nz-card>
+        }
+      </div>
+      @if (pagination && data.length > pageSize()) {
+        <nz-pagination
+          class="responsive-data-table__pagination"
+          [nzPageIndex]="pageIndex()"
+          [nzTotal]="data.length"
+          [nzPageSize]="pageSize()"
+          [nzPageSizeOptions]="pagination.pageSizeOptions"
+          [nzShowSizeChanger]="pagination.showSizeChanger"
+          (nzPageIndexChange)="onPageIndexChange($event)"
+          (nzPageSizeChange)="onPageSizeChange($event)"
+        />
+      }
+    }
+  </div>
+
+  <div class="responsive-data-table__table">
+    <nz-table
+      #dataTable
+      [nzData]="pagination ? getDisplayData() : data"
+      [nzLoading]="loading"
+      [nzFrontPagination]="false"
+      [nzShowPagination]="false"
+      [nzScroll]="getTableScroll()"
+    >
+      <thead>
+        <tr>
+          @for (col of columns; track col.key) {
+            <th>{{ col.title }}</th>
+          }
+          @if (rowAction()) {
+            <th>Acción</th>
+          }
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of (pagination ? getDisplayData() : data); track trackByFn?.($index, item) ?? $index) {
+          <tr>
+            @for (col of columns; track col.key) {
+              <td>
+                @if (isTagColumn(col)) {
+                  <nz-tag [nzColor]="getTagColor(item, col)">
+                    {{ formatCellValue(item, col) }}
+                  </nz-tag>
+                } @else {
+                  {{ formatCellValue(item, col) }}
+                }
+              </td>
+            }
+            @if (rowAction(); as actionTpl) {
+              <td>
+                <ng-container [ngTemplateOutlet]="actionTpl" [ngTemplateOutletContext]="{ $implicit: item }"></ng-container>
+              </td>
+            }
+          </tr>
+        }
+      </tbody>
+    </nz-table>
+    @if (pagination && data.length > pageSize()) {
+      <nz-pagination
+        class="responsive-data-table__pagination"
+        [nzPageIndex]="pageIndex()"
+        [nzTotal]="data.length"
+        [nzPageSize]="pageSize()"
+        [nzPageSizeOptions]="pagination.pageSizeOptions"
+        [nzShowSizeChanger]="pagination.showSizeChanger"
+        (nzPageIndexChange)="onPageIndexChange($event)"
+        (nzPageSizeChange)="onPageSizeChange($event)"
+      />
+    }
+  </div>
+</div>

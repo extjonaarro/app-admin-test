@@ -1,0 +1,52 @@
+<nz-layout class="investment-layout">
+  <nz-header class="investment-layout__header">
+    <div class="investment-layout__brand">
+      <button
+        nz-button
+        nzType="default"
+        class="investment-layout__menu-button"
+        (click)="openMobileMenu()"
+        aria-label="Abrir menú"
+      >
+        <nz-icon nzType="menu" nzTheme="outline" />
+      </button>
+
+      <div>
+        <p class="investment-layout__eyebrow">Fondo de inversiones BTG</p>
+        <strong>Panel principal</strong>
+      </div>
+    </div>
+
+    <div class="investment-layout__user">
+      <nz-avatar nzText="JA"></nz-avatar>
+      <div>
+        <strong>Jonathan Arroyo</strong>
+        <p>Asociado</p>
+      </div>
+    </div>
+  </nz-header>
+
+  <nz-layout>
+    <nz-sider class="investment-layout__sider" [nzWidth]="240">
+      <div class="investment-layout__sider-content">
+        <app-sidebar-nav [items]="navigationItems" />
+      </div>
+    </nz-sider>
+
+    <nz-content class="investment-layout__content">
+      <router-outlet />
+    </nz-content>
+  </nz-layout>
+</nz-layout>
+
+<nz-drawer
+  [nzClosable]="true"
+  [nzVisible]="isMobileMenuOpen()"
+  nzPlacement="left"
+  nzTitle="Menú"
+  (nzOnClose)="closeMobileMenu()"
+>
+  <ng-container *nzDrawerContent>
+    <app-sidebar-nav [items]="navigationItems" />
+  </ng-container>
+</nz-drawer>

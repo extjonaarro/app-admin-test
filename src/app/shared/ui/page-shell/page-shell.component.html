@@ -1,0 +1,12 @@
+<section class="page-shell">
+  <header class="page-shell__header">
+    <h1>{{ title() }}</h1>
+    @if (subtitle()) {
+      <p class="page-shell__subtitle">{{ subtitle() }}</p>
+    }
+  </header>
+
+  <div class="page-shell__content">
+    <ng-content />
+  </div>
+</section>

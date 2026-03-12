@@ -1,0 +1,43 @@
+<section>
+  <nz-descriptions
+    nzBordered
+    nzTitle="Descripción"
+    nzLayout="vertical"
+    nzSize="small"
+    [nzColumn]="1"
+    class="fund-subscription-form__description"
+  >
+    <nz-descriptions-item nzTitle="Fondo">
+      {{ fund().name }}
+    </nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Categoría">
+      <nz-tag [nzColor]="fundCategoryColor[fund().category]">{{ fund().category }}</nz-tag>
+    </nz-descriptions-item>
+    <nz-descriptions-item nzTitle="Monto mínimo">
+      {{ fund().minimumAmount | currency: 'COP' : 'symbol' : '1.0-0' }}
+    </nz-descriptions-item>
+  </nz-descriptions>
+
+  <form nz-form nzLayout="vertical">
+  <nz-form-item class="fund-subscription-form__field">
+    <nz-form-label
+      nzFor="subscription-amount"
+      nzRequired
+    >
+      Valor a suscribir
+    </nz-form-label>
+    <nz-form-control
+      [nzSpan]="24"
+      [nzErrorTip]="errorMessage()"
+    >
+      <input
+        id="subscription-amount"
+        nz-input
+        type="number"
+        [formControl]="amountControl()"
+        [placeholder]="minimumAmountPlaceholder()"
+      />
+    </nz-form-control>
+  </nz-form-item>
+  </form>
+</section>

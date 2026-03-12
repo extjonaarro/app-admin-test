@@ -1,0 +1,81 @@
+<app-page-shell
+  title="Inicio"
+  subtitle="Resumen general del saldo disponible para operar en el fondo de inversiones."
+>
+  @if (dashboardData$ | async; as dashboardData) {
+    <nz-card class="dashboard-page__card">
+      <span class="dashboard-page__label">Saldo disponible</span>
+      <strong class="dashboard-page__balance">
+        {{ dashboardData.balance.amount | currency: 'COP' : 'symbol' : '1.0-0' }}
+      </strong>
+      <p class="dashboard-page__helper">
+        Saldo actualizado del usuario Jonathan Arroyo Reina.
+      </p>
+    </nz-card>
+
+    <section class="dashboard-page__subscriptions-section">
+      <div class="dashboard-page__section-header">
+        <h2>Fondos suscritos</h2>
+        <p>Consulta tus suscripciones activas y cancela cuando lo necesites.</p>
+      </div>
+
+      @if (dashboardData.subscriptions.length) {
+        <div nz-row [nzGutter]="[16, 16]">
+          @for (subscription of dashboardData.subscriptions; track subscription.id) {
+            <div nz-col [nzXs]="24" [nzLg]="12">
+              <nz-spin [nzSpinning]="cancellingSubscriptionId() === subscription.id">
+                <nz-card
+                  class="dashboard-page__subscription-card"
+                  nzHoverable
+                  nzBordered
+                  [nzTitle]="subscription.fundName"
+                  [nzExtra]="subscriptionActions"
+                >
+                  <ng-template #subscriptionActions>
+                    <button
+                      nz-button
+                      nzType="default"
+                      nzDanger
+                      nz-popconfirm
+                      nzPopconfirmTitle="¿Estás seguro de cancelar la suscripción?"
+                      nzPopconfirmPlacement="bottomRight"
+                      nzOkText="Sí, cancelar"
+                      nzCancelText="No"
+                      [nzLoading]="cancellingSubscriptionId() === subscription.id"
+                      [disabled]="cancellingSubscriptionId() === subscription.id"
+                      (nzOnConfirm)="cancelSubscription(subscription)"
+                    >
+                      Cancelar
+                    </button>
+                  </ng-template>
+
+                  <nz-descriptions nzTitle="Detalle" nzLayout="vertical" nzSize="small" [nzColumn]="1">
+                    <nz-descriptions-item nzTitle="Categoría">
+                      <nz-tag [nzColor]="fundCategoryColor[subscription.category]">
+                        {{ subscription.category }}
+                      </nz-tag>
+                    </nz-descriptions-item>
+                    <nz-descriptions-item nzTitle="Fecha de suscripción">
+                      {{ subscription.createdAt | date: 'dd/MM/yyyy HH:mm:ss' }}
+                    </nz-descriptions-item>
+                    <nz-descriptions-item nzTitle="Valor suscrito">
+                      {{ subscription.amount | currency: 'COP' : 'symbol' : '1.0-0' }}
+                    </nz-descriptions-item>
+                  </nz-descriptions>
+                </nz-card>
+              </nz-spin>
+            </div>
+          }
+        </div>
+      } @else {
+        <nz-card class="dashboard-page__empty-card">
+          <p class="dashboard-page__empty-text">No tienes fondos suscritos en este momento.</p>
+        </nz-card>
+      }
+    </section>
+  } @else {
+    <div class="dashboard-page__spinner">
+      <nz-spin nzTip="Cargando información del usuario..."></nz-spin>
+    </div>
+  }
+</app-page-shell>

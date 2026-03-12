@@ -1,0 +1,57 @@
+.dashboard-page__card {
+  border-radius: 20px;
+}
+
+.dashboard-page__card,
+.dashboard-page__subscription-card,
+.dashboard-page__empty-card {
+  border-radius: 20px;
+}
+
+.dashboard-page__label {
+  display: block;
+  color: var(--app-text-muted);
+  font-size: 0.95rem;
+}
+
+.dashboard-page__balance {
+  display: block;
+  margin-top: 8px;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1.1;
+}
+
+.dashboard-page__helper {
+  margin: 12px 0 0;
+  color: var(--app-text-muted);
+}
+
+.dashboard-page__subscriptions-section {
+  margin-top: 24px;
+}
+
+.dashboard-page__section-header {
+  margin-bottom: 16px;
+}
+
+.dashboard-page__section-header h2 {
+  margin: 0 0 6px;
+  font-size: 1.5rem;
+}
+
+.dashboard-page__section-header p {
+  margin: 0;
+  color: var(--app-text-muted);
+}
+
+.dashboard-page__empty-text,
+.dashboard-page__loading {
+  margin: 0;
+  color: var(--app-text-muted);
+}
+
+.dashboard-page__spinner {
+  display: flex;
+  justify-content: center;
+  padding: 48px 0;
+}
