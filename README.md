@@ -114,5 +114,5 @@ Vídeos o capturas del uso de la aplicación en diferentes dispositivos:
 
 ### Mobile
 
-<!-- Aquí: capturas, GIFs o enlaces a vídeo mostrando el uso en móvil/responsive -->
+![Mobile-App-Fondo](https://github.com/user-attachments/assets/496d8ab8-82e0-4d4e-ae40-bed8e7b24464)
 
