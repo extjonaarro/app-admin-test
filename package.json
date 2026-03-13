@@ -14,7 +14,8 @@
     "build:prod": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "test:ci": "ng test --watch=false --coverage"
+    "test:ci": "ng test --watch=false --coverage",
+    "postinstall": "cd api && npm install"
   },
   "private": true,
   "packageManager": "npm@10.9.4",
