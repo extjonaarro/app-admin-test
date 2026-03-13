@@ -110,9 +110,9 @@ Vídeos o capturas del uso de la aplicación en diferentes dispositivos:
 
 ### Desktop
 
-<!-- Aquí: capturas, GIFs o enlaces a vídeo mostrando el uso en pantalla grande -->
+![Desktop-App-Fondo](https://github.com/user-attachments/assets/836b6519-fb7b-4a64-b413-e03109622023)
 
 ### Mobile
 
-<!-- Aquí: capturas, GIFs o enlaces a vídeo mostrando el uso en móvil/responsive -->
+![Mobile-App-Fondo](https://github.com/user-attachments/assets/496d8ab8-82e0-4d4e-ae40-bed8e7b24464)
 
